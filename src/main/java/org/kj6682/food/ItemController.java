@@ -28,7 +28,7 @@ public class ItemController {
             model.addAttribute("items", itemList);
         }
 
-        return "allitems";
+        return "all";
     }
 
     @RequestMapping(value = "/{category}", method = RequestMethod.GET)
@@ -42,26 +42,6 @@ public class ItemController {
         }
 
         return "items";
-    }
-    private void testItem(List<Item> itemList) {
-        Item item = new Item();
-        item.setName("Rochefort 10");
-        item.setQuantity(Integer.valueOf(10));
-        item.setCategory("Birra Trappista");
-        itemList.add(item);
-
-        item = new Item();
-        item.setName("Rochefort 6");
-        item.setQuantity(Integer.valueOf(6));
-        item.setCategory("Birra Trappista");
-        itemList.add(item);
-
-        item = new Item();
-        item.setName("Rochefort 8");
-        item.setQuantity(Integer.valueOf(8));
-        item.setCategory("Birra Trappista");
-        itemList.add(item);
-
     }
 
     @RequestMapping(value = "/{category}", method = RequestMethod.POST)

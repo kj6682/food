@@ -20,7 +20,7 @@ public class ItemController {
     private ItemRepository repo;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public String listAllItems(Model model) {
+    public String renderListOfAllItems(Model model) {
 
         List<Item> itemList = repo.findAll();
 
@@ -32,10 +32,10 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/{category}", method = RequestMethod.GET)
-    public String listCategoryItems( @PathVariable("category") String category,
+    public String renderListOfItemsInCategory( @PathVariable("category") String category,
                                      Model model) {
 
-        List<Item> itemList = repo.findByCategory(category);
+        List<Item> itemList = repo.findByCategory(Item.Category.valueOf(category.toUpperCase()));
 
         if (itemList != null) {
             model.addAttribute("items", itemList);
@@ -44,13 +44,19 @@ public class ItemController {
         return "items";
     }
 
-    @RequestMapping(value = "/{category}", method = RequestMethod.POST)
-    public String addItemToCategory(@PathVariable("category") String category, Item item){
+    @RequestMapping(value = "/{type}", method = RequestMethod.POST)
+    public String addItemToCategory(@PathVariable("type") String type,
+                                    String name,
+                                    String quantity,
+                                    String category){
 
-        item.setCategory(category);
+        Item item = new Item();
+        item.setName(name);
+        item.setQuantity(Integer.valueOf(quantity));
+        item.setCategory(Item.Category.valueOf(category.toUpperCase()));
         repo.save(item);
 
-        return "redirect:/{category}";
+        return "redirect:/{type}";
     }
 
 }

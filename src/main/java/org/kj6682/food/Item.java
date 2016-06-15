@@ -10,16 +10,24 @@ import java.time.LocalDate;
  * Created by luigi on 19/04/16.
  */
 @Entity
-public class Item {
+class Item {
+
+    static enum Category {
+        BISCUITS, MEAT, VEGETABLES, DRINKS, EGGS, BREAD, DAIRIES, SNACKS, CAKES, SALAMI
+    }
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long _id;
     private String name;
-    private String category;
+    private Category category;
     private LocalDate begin;
     private LocalDate end;
     private Integer quantity;
+
+    public Item() {
+        super();
+    }
 
     public Long get_id() {
         return _id;
@@ -35,14 +43,6 @@ public class Item {
 
     public void setBegin(LocalDate begin) {
         this.begin = begin;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public LocalDate getEnd() {
@@ -69,5 +69,12 @@ public class Item {
         this.quantity = quantity;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
 }

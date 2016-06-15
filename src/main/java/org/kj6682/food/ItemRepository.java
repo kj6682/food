@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    List<Item> findByCategory(String category);
+    List<Item> findByCategory(Item.Category category);
 
 }

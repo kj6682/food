@@ -20,7 +20,7 @@ public class ItemController {
     private ItemRepository repo;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public String renderListOfAllItems(Model model) {
+    public String renderAll(Model model) {
 
         List<Item> itemList = repo.findAll();
 
@@ -32,7 +32,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/{category}", method = RequestMethod.GET)
-    public String renderListOfItemsInCategory( @PathVariable("category") String category,
+    public String renderItems( @PathVariable("category") String category,
                                      Model model) {
 
         List<Item> itemList = repo.findByCategory(Item.Category.valueOf(category.toUpperCase()));
@@ -45,7 +45,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/{type}", method = RequestMethod.POST)
-    public String addItemToCategory(@PathVariable("type") String type,
+    public String addItem(@PathVariable("type") String type,
                                     String name,
                                     String quantity,
                                     String category){
